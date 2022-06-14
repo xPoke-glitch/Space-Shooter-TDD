@@ -17,7 +17,7 @@ public class player_movement
         playerMovement.Move(Vector2.left);
         
         // Assert
-        yield return new WaitForSeconds(10.0f);
+        yield return new WaitForSeconds(5.0f);
         Assert.IsTrue(testObject.transform.position.x < 0.0f);
     }
 
@@ -32,7 +32,7 @@ public class player_movement
         playerMovement.Move(Vector2.right);
 
         // Assert
-        yield return new WaitForSeconds(10.0f);
+        yield return new WaitForSeconds(5.0f);
         Assert.IsTrue(testObject.transform.position.x > 0.0f);
     }
 
@@ -47,9 +47,7 @@ public class player_movement
         playerMovement.Move(Vector2.up);
         playerMovement.Move(Vector2.down);
         // Assert
-        yield return new WaitForSeconds(10.0f);
+        yield return new WaitForSeconds(5.0f);
         Assert.IsTrue(testObject.transform.position.x == 0.0f);
     }
-
-
 }
