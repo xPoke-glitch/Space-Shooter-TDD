@@ -47,6 +47,10 @@ public class player_shot
         yield return new WaitForSeconds(0.1f);
         inputManager.GetShootPressed().Returns(false);
 
+        inputManager.GetShootPressed().Returns(true);
+        yield return new WaitForSeconds(0.1f);
+        inputManager.GetShootPressed().Returns(false);
+
         yield return new WaitForSeconds(playerShot.FireRate);
 
         inputManager.GetShootPressed().Returns(true);
