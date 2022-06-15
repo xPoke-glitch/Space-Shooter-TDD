@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 204585481}
   - component: {fileID: 204585480}
   - component: {fileID: 204585482}
+  - component: {fileID: 204585483}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -219,6 +220,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 13
+--- !u!114 &204585483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204585479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 085c21e4df26b1c4881492bfe28aeba4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 4895984732725778578, guid: 5a3588534b743944494597e4c218239f, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,6 +389,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ce053716-bf76-4b3f-bc25-a28bbb8808e5
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1336282715}
+        m_TargetAssemblyTypeName: InputManager, Scripts
+        m_MethodName: ShootPressed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 9e8212a1-a52f-4be0-a955-aa5df2cc61ef
+    m_ActionName: Player/Shoot[/Keyboard/k]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

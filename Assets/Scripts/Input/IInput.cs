@@ -6,4 +6,5 @@ public interface IInput
 {
     public bool IsMoving { get; }
     public Vector2 MoveDirection { get; }
+    public bool GetShootPressed();
 }
