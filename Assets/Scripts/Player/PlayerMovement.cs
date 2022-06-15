@@ -24,10 +24,14 @@ public class PlayerMovement : MonoBehaviour
         if (direction.Equals(Vector2.left))
         {
             transform.position += Time.deltaTime * Vector3.left * movementSpeed;
+            if (transform.position.x <= -8.5f)
+                transform.position = new Vector3 (-8.5f, transform.position.y, transform.position.z);
         }
         else if (direction.Equals(Vector2.right))
         {
             transform.position += Time.deltaTime * Vector3.right * movementSpeed;
+            if (transform.position.x >= 8.5f)
+                transform.position = new Vector3(8.5f, transform.position.y, transform.position.z);
         }
     }
 

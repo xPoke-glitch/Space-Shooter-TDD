@@ -18,7 +18,7 @@ public class player_movement
 
         // Act
         inputManager.MoveDirection.Returns(Vector2.left);
-        inputManager.IsMoving.Returns(true);   
+        inputManager.IsMoving.Returns(true);
 
         // Assert
         yield return new WaitForSeconds(0.3f);
@@ -54,7 +54,7 @@ public class player_movement
 
         // Act
         inputManager.MoveDirection.Returns(Vector2.up);
-        inputManager.IsMoving.Returns(true);        
+        inputManager.IsMoving.Returns(true);
 
         yield return new WaitForSeconds(0.3f);
 
@@ -64,5 +64,41 @@ public class player_movement
         // Assert
         yield return new WaitForSeconds(0.3f);
         Assert.AreEqual(0.0f, testObject.transform.position.x);
+    }
+
+    [UnityTest]
+    public IEnumerator player_do_not_move_over_camera_border_left()
+    {
+        // Arrange
+        GameObject testObject = new GameObject("Test_Player");
+        PlayerMovement playerMovement = testObject.AddComponent<PlayerMovement>();
+        IInput inputManager = Substitute.For<IInput>();
+        playerMovement.SetInput(inputManager);
+
+        // Act
+        inputManager.MoveDirection.Returns(Vector2.left);
+        inputManager.IsMoving.Returns(true);
+        yield return new WaitForSeconds(5.0f);
+
+        // Assert
+        Assert.IsTrue(testObject.transform.position.x >= -8.5f);
+    }
+
+    [UnityTest]
+    public IEnumerator player_do_not_move_over_camera_border_right()
+    {
+        // Arrange
+        GameObject testObject = new GameObject("Test_Player");
+        PlayerMovement playerMovement = testObject.AddComponent<PlayerMovement>();
+        IInput inputManager = Substitute.For<IInput>();
+        playerMovement.SetInput(inputManager);
+
+        // Act
+        inputManager.MoveDirection.Returns(Vector2.right);
+        inputManager.IsMoving.Returns(true);
+        yield return new WaitForSeconds(5.0f);
+
+        // Assert
+        Assert.IsTrue(testObject.transform.position.x <= 8.5f);
     }
 }
