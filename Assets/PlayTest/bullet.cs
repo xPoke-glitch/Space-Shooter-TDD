@@ -13,7 +13,10 @@ public class bullet
     {
         // Arrange
         GameObject testObject = new GameObject("Test_Bullet");
-        testObject.AddComponent<Bullet>();
+        GameObject testPool = new GameObject("Test_Pool");
+        PlayerBulletPool playerBulletPool = testPool.AddComponent<PlayerBulletPool>();
+        Bullet bullet = testObject.AddComponent<Bullet>();
+        bullet.SetPool(playerBulletPool);
 
         // Act
         yield return new WaitForSeconds(1.0f);
@@ -23,16 +26,19 @@ public class bullet
     }
 
     [UnityTest]
-    public IEnumerator bullet_is_destroyed_after_time()
+    public IEnumerator bullet_is_deactivated_after_time()
     {
         // Arrange
         GameObject testObject = new GameObject("Test_Bullet");
+        GameObject testPool = new GameObject("Test_Pool");
+        PlayerBulletPool playerBulletPool = testPool.AddComponent<PlayerBulletPool>();
         Bullet bullet = testObject.AddComponent<Bullet>();
+        bullet.SetPool(playerBulletPool);
 
         // Act
         yield return new WaitForSeconds(bullet.DestroyTime + 0.1f);
 
         // Assert
-        Assert.IsTrue(null == testObject); // IsNull not correct to use it in this case - Object is not techincally Null, is <Null>
+        Assert.IsTrue(testObject.activeSelf == false); // IsNull not correct to use it in this case - Object is not techincally Null, is <Null>
     }
 }
