@@ -7,6 +7,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float movementSpeed = 2.0f;
 
+    private IInput _IInputManager;
+
+    private void Awake() // this should be constructor (Constructor Dependecy Injection)
+    {
+        _IInputManager = InputManager.Instance;
+    }
+
+    public void SetInput(IInput inputManager) // this should be constructor (Constructor Dependecy Injection)
+    {
+        _IInputManager = inputManager;
+    }
+
     public void Move(Vector2 direction)
     {
         if (direction.Equals(Vector2.left))
@@ -21,9 +33,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (InputManager.Instance.IsMoving)
+        if (_IInputManager.IsMoving)
         {
-            Move(InputManager.Instance.MoveDirection);
+            Move(_IInputManager.MoveDirection);
         }
     }
 }

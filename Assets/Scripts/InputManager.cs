@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerInput))]
-public class InputManager : Singleton<InputManager>
+public class InputManager : Singleton<InputManager>, IInput
 {
     public bool IsMoving { get; private set; }
     public Vector2 MoveDirection { get; private set; }
@@ -26,6 +26,5 @@ public class InputManager : Singleton<InputManager>
     // for any of the below 'Get' methods, if we're getting it then we're also using it,
     // which means we should set it to false so that it can't be used again until actually
     // pressed again. (GetKeyDown Behaviour)
-
     
 }
