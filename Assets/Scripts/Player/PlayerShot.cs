@@ -9,11 +9,11 @@ public class PlayerShot : MonoBehaviour
     [SerializeField]
     private float fireRate = 1.0f;
 
-    [SerializeField]
-    private GameObject bulletPrefab;
 
     private IInput _IInputManager;
+    private IObjectPool<Bullet> _IObjectPool;
 
+    private GameObject _bulletPrefab;
     private float _fireRateTimer = 0.0f;
     private bool _canShoot = true;
 
@@ -23,12 +23,19 @@ public class PlayerShot : MonoBehaviour
     }
     public void SetPrefab(GameObject prefab)
     {
-        bulletPrefab = prefab;
+        _bulletPrefab = prefab;
+        _IObjectPool.SetPrefab(_bulletPrefab.GetComponent<Bullet>());
+    }
+
+    public void SetPool(IObjectPool<Bullet> pool)
+    {
+        _IObjectPool = pool;
     }
 
     private void Awake()
     {
         _IInputManager = InputManager.Instance;
+        _IObjectPool = PlayerBulletPool.Instance;
     }
 
     private void Update()
@@ -44,7 +51,12 @@ public class PlayerShot : MonoBehaviour
     {
         if (!_canShoot)
             return;
-        Instantiate(bulletPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+
+        var shot = _IObjectPool.Get();
+        shot.transform.rotation = transform.rotation;
+        shot.transform.position = transform.position;
+        shot.gameObject.SetActive(true);
+
         _canShoot = false;
     }
 

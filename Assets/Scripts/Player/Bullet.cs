@@ -12,6 +12,17 @@ public class Bullet : MonoBehaviour
     private float speed = 4.0f;
 
     private float _currentTimer = 0.0f;
+    private IObjectPool<Bullet> _IObjectPool;
+
+    public void SetPool(IObjectPool<Bullet> pool)
+    {
+        _IObjectPool = pool;
+    }
+
+    private void Awake()
+    {
+        _IObjectPool = PlayerBulletPool.Instance;
+    }
 
     private void Update()
     {
@@ -27,7 +38,10 @@ public class Bullet : MonoBehaviour
     private void Destroy()
     {
         _currentTimer += Time.deltaTime;
-        if(_currentTimer >= DestroyTime)
-            Destroy(gameObject);
+        if (_currentTimer >= DestroyTime)
+        {
+            _IObjectPool.ReturnToPool(this);
+            _currentTimer = 0.0f;
+        }
     }
 }
