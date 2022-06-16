@@ -63,4 +63,28 @@ public class enemy
         // Assert
         Assert.IsTrue(testObject == null);
     }
+
+    [UnityTest]
+    public IEnumerator enemy_kill_player()
+    {
+        // Arrange
+        GameObject testObject = new GameObject("Test_Enemy");
+        testObject.transform.position = new Vector3(0, 4.0f, 0);
+        Enemy enemy = testObject.AddComponent<Enemy>();
+        BoxCollider2D collider = testObject.GetComponent<BoxCollider2D>();
+        collider.isTrigger = true;
+        Rigidbody2D rigidbody2D = testObject.GetComponent<Rigidbody2D>();
+        rigidbody2D.isKinematic = true;
+
+        GameObject playerTestObject = new GameObject("Test_Player");
+        Player player = playerTestObject.AddComponent<Player>();
+        BoxCollider2D playerCollider = playerTestObject.AddComponent<BoxCollider2D>();
+        playerCollider.size = new Vector2(1.0f, 1.0f);
+
+        // Act
+        yield return new WaitForSeconds(5.0f);
+
+        // Assert
+        Assert.IsTrue(playerTestObject == null);
+    }
 }
