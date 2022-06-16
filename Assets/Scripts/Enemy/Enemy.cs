@@ -2,43 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+[RequireComponent(typeof(BoxCollider2D), typeof(Rigidbody2D))]
+public class Enemy : MonoBehaviour
 {
     public float DestroyTime { get => destroyTime; }
 
     [SerializeField]
     private float destroyTime = 10.0f;
     [SerializeField]
-    private float speed = 4.0f;
+    private float movementSpeed = 2.0f;
 
     private float _currentTimer = 0.0f;
-    private IObjectPool<Bullet> _IObjectPool;
 
     public void Destroy()
-    {
-        _IObjectPool.ReturnToPool(this);
+    { 
         _currentTimer = 0.0f;
-    }
-
-    public void SetPool(IObjectPool<Bullet> pool)
-    {
-        _IObjectPool = pool;
-    }
-
-    private void Awake()
-    {
-        _IObjectPool = PlayerBulletPool.Instance;
+        GameObject.Destroy(gameObject);
     }
 
     private void Update()
     {
-        MoveUp();
+        Move();
         TimerToDestroy();
     }
 
-    private void MoveUp()
+    private void Move()
     {
-        this.transform.position += Vector3.up * Time.deltaTime * speed;
+        transform.position += Vector3.down * movementSpeed * Time.deltaTime;
     }
 
     private void TimerToDestroy()
@@ -47,6 +37,15 @@ public class Bullet : MonoBehaviour
         if (_currentTimer >= DestroyTime)
         {
             Destroy();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.GetComponent<Bullet>() != null)
+        {
+            collision.gameObject.GetComponent<Bullet>().Destroy();
+            Destroy(gameObject);
         }
     }
 }
