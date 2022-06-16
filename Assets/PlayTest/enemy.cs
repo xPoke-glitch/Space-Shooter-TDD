@@ -5,7 +5,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-public class enemy : MonoBehaviour
+public class enemy
 {
     [UnityTest]
     public IEnumerator enemy_is_moving_down()
