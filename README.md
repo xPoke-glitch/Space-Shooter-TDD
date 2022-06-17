@@ -29,6 +29,6 @@ I learnt how to use the Unity Test Framework, how to create separated assemblies
 
 I also learnt new techniques like class mocking for testing classes (especially Monobehaviour ones) and the Dependency Injection Pattern for testing classes with Singletons dependencies.
 
-I also understood and learnt the principles behind the TDD (Test Driven Development) and dealt with the problems of creating test classes and maintaining them.
+I also understood and learnt the principles behind the TDD (Test Driven Development) and dealt with the problems of creating and maintaining test classes.
 
 <img src="https://github.com/xPoke-glitch/Space-Shooter-TDD/blob/main/Screenshots/editor.png" width="750">
