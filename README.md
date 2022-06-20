@@ -32,3 +32,9 @@ I also learnt new techniques like class mocking for testing classes (especially 
 I also understood and learnt the principles behind the TDD (Test Driven Development) and dealt with the problems of creating and maintaining test classes.
 
 <img src="https://github.com/xPoke-glitch/Space-Shooter-TDD/blob/main/Screenshots/editor.png" width="750">
+
+## Team
+
+**Developers**:
+* Cristian: https://github.com/xPoke-glitch / https://pokedev.itch.io/
+
